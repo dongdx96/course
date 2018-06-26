@@ -1,0 +1,26 @@
+create table if not exists course(
+	courseID int(3) primary key,
+	courseName varchar(100)
+);
+
+create table if not exists trainee(
+	traineeID int(3) primary key,
+	name varchar(30),
+	dob date,
+	address varchar(100),
+	instructorID int(3),
+	courseID int(3),
+	courseScore double(4, 2)
+);
+
+create table if not exists instructor(
+	instructorID int(3) primary key,
+	name varchar(30),
+	dob date,
+	address varchar(100),
+	courseID int(3),
+	salary int(9)	
+);
+ALTER table instructor add FOREIGN KEY(courseID) REFERENCES course(courseID);
+ALTER table trainee add FOREIGN KEY(courseID) REFERENCES course(courseID);
+ALTER table trainee add FOREIGN KEY(instructorID) REFERENCES instructor(instructorID);
